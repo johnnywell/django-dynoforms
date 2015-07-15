@@ -1,1 +1,4 @@
-cerberus
+https://bitbucket.org/schinckel/django-postgres/get/6a6078d8a2cc.zip
+psycopg2
+django
+django-material

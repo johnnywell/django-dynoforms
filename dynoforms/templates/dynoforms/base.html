@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        {% include 'material/includes/material_css.html' %}
+        {% include 'material/includes/material_js.html' %}
+        {% block head %} {% endblock %}
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+    <body>
+        <div id="content">
+        {% block content %}
+        {% endblock %}
+        </div>
+    </body>
+</html>
