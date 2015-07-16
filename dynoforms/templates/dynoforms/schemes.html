@@ -1,0 +1,6 @@
+{% extends 'dynoforms/base.html' %}
+{% block content %}
+{% for schema in schemes %}
+<a href={{ schema.new_entry_ur }}l>{{ schema.name }}</a>
+{% endfor %} 
+{% endblock %}

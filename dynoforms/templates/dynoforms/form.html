@@ -1,5 +1,9 @@
 {% extends "dynoforms/base.html" %}
 {% block title %} Dynamic Forms {% endblock %}
 {% block content %}
-{% include "dynoforms/dynoform.html" %}
+<div class="row valing">
+    <div class="col s12 m8 offset-m2 l8 offset-l2">
+        {% include "dynoforms/dynoform.html" %}
+    </div>
+</div>
 {% endblock %}

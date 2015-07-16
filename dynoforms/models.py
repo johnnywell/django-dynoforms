@@ -14,6 +14,10 @@ class Schema(models.Model):
     def __str__(self):
         return self.name
 
+    @permalink
+    def new_entry_url(self):
+        return ('dynoforms-new-entry', [self.pk])
+
 
 class Entry(models.Model):
     schema = models.ForeignKey(Schema)
