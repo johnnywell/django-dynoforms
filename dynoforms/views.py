@@ -32,4 +32,5 @@ class NewEntry(CreateView):
             kwargs.update({'schema': get_object_or_404(
                 Schema, pk=self.kwargs['pk'])
             })
+        kwargs['owner'] = self.request.user
         return kwargs
