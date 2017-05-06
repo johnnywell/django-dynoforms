@@ -1,16 +1,17 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import permalink
-from postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.translation import ugettext_lazy as _
 
 
 class BaseModel(models.Model):
-    _created = models.DateTimeField(_("Created at"), auto_now_add=True)
-    _updated = models.DateTimeField(_("Last update"), auto_now=True)
-    _owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+    created = models.DateTimeField(_("Created at"), auto_now_add=True)
+    updated = models.DateTimeField(_("Last update"), auto_now=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                                help_text="Who created it")
-    _deleted = models.BooleanField(_('deleted'), default=False, editable=False)
+    deleted = models.BooleanField(_('deleted'), default=False, editable=False)
 
     class Meta(object):
         abstract = True
@@ -24,7 +25,7 @@ class Schema(BaseModel):
         help_text=_('A description to guide the form usage'),
         blank=True,
     )
-    fields = JSONField(_('fields'))
+    fields = JSONField(_('fields'), encoder=DjangoJSONEncoder)
 
     def __str__(self):
         return self.name
@@ -36,7 +37,7 @@ class Schema(BaseModel):
 
 class Entry(BaseModel):
     schema = models.ForeignKey(Schema)
-    data = JSONField(_('data'), blank=True)
+    data = JSONField(_('data'), encoder=DjangoJSONEncoder, blank=True)
 
     @permalink
     def get_absolute_url(self):

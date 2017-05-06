@@ -43,7 +43,7 @@ class DynoForm(forms.ModelForm):
 
     def save(self, commit=True):
         self.instance.schema = self.schema
-        self.instance._owner = self.owner
+        self.instance.owner = self.owner
         self.instance.data = self.cleaned_data
         self.instance.save()
         return self.instance
