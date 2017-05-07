@@ -29,9 +29,14 @@ class DynoForm(forms.ModelForm):
         super(DynoForm, self).__init__(**kwargs)
         for field in self.schema.fields.keys():
             # pop the field type, leaving only paramenters
+            required = False
             ftype = self.schema.fields[field].pop('type')
             try:
-                self.fields[field] = FIELDS[ftype]()  # Instantiate the field.
+                required = self.schema.fields[field].pop('required')
+            except KeyError:
+                pass
+            try:
+                self.fields[field] = FIELDS[ftype](required=required) # Instantiate the field.
             except KeyError:
                 self.add_error(
                     field,
